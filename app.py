@@ -57,6 +57,10 @@ import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
 from datetime import datetime
+from pathlib import Path
+
+# Chemin absolu vers le CSV (fonctionne en local ET sur Streamlit Cloud)
+CSV_PATH = Path(__file__).parent / "Cookie_Company.csv"
 
 # ─────────────────────────────────────────────────────────────────
 # PAGE CONFIG
@@ -323,7 +327,7 @@ st.markdown(f"""
 # ─────────────────────────────────────────────────────────────────
 @st.cache_data
 def load_and_simulate():
-    df_raw = pd.read_csv("Cookie_Company.csv")
+    df_raw = pd.read_csv(CSV_PATH)
     df_raw["Country"] = df_raw["Country"].replace("états-unis", "USA")
     df_raw["Date"] = pd.to_datetime(df_raw["Date"])
 
